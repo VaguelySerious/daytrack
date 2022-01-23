@@ -11,3 +11,56 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+.page {
+  --bg-color: white;
+  --bg-color-today: purple;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.pagewrapper {
+  max-width: 1000px;
+}
+
+.year {
+  margin-top: 3rem;
+}
+
+.yearcontents {
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.daywrapper {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.week {
+  /* display: flex; */
+}
+
+.day {
+  text-align: center;
+  margin: 1px;
+  width: 14px;
+  height: 14px;
+  border: 1px solid var(--bg-color);
+}
+
+.controls {
+  margin-top: 2rem;
+}
+
+button {
+  min-width: 50px;
+  min-height: 30px;
+  padding: 8px;
+  margin-right: 1rem;
+  border: none;
+  background-color: lightblue;
+}
