@@ -40,7 +40,7 @@ function App() {
       weeks.push(days.slice(i, i + 7));
     }
     return { weeks, name: yearNumber };
-  });
+  }).reverse();
 
   // TODO Get the highest and lowest day count and turn them into bounds for the color gradient
 
