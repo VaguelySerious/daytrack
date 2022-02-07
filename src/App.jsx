@@ -8,8 +8,19 @@ import {
 } from "./util";
 
 const monthInitials = "JFMAMJJASOND".split("");
-const monthNames = ["January", "February", "March", "April", "May", "June",
-  "July", "August", "September", "October", "November", "December"
+const monthNames = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
 ];
 
 const currentYear = new Date().getFullYear();
@@ -50,10 +61,10 @@ export default function App() {
   };
   const changeMonth = (newMonth) => {
     if (newMonth < 0) {
-      changeYear(year-1);
+      changeYear(year - 1);
       newMonth = 11; // December
     } else if (newMonth > 11) {
-      changeYear(year+1);
+      changeYear(year + 1);
       newMonth = 0;
     }
     setMonth(newMonth);
@@ -61,10 +72,10 @@ export default function App() {
   };
   const changeDay = (newDay) => {
     if (newDay <= 0) {
-      const newMonth = changeMonth(month-1);
+      const newMonth = changeMonth(month - 1);
       newDay = daysInMonth(newMonth, year);
     } else if (newDay > daysInMonth(month, year)) {
-      changeMonth(month+1);
+      changeMonth(month + 1);
       newDay = 1;
     }
     setDay(newDay);
@@ -91,18 +102,27 @@ export default function App() {
     const v = y[getDayOfYear(day, month, year)] || {};
     return v[key] || 0;
   };
+  const getValueAt = (day, month, year, key) => {
+    const y = data[year] || {};
+    const v = y[getDayOfYear(day, month, year)] || {};
+    return v[key] || 0;
+  };
 
   return (
     <div className="App page">
       <div className="pagewrapper">
         <div className="time-select">
-          <span className="day-select-arrow" onClick={() => changeYear(year-1)}>
+          <span
+            className="day-select-arrow"
+            onClick={() => changeYear(year - 1)}
+          >
             &lt;
           </span>
-          <h2 className="time-select-title">
-            {year}
-          </h2>
-          <span className="time-select-arrow" onClick={() => changeYear(year+1)}>
+          <h2 className="time-select-title">{year}</h2>
+          <span
+            className="time-select-arrow"
+            onClick={() => changeYear(year + 1)}
+          >
             &gt;
           </span>
         </div>
@@ -115,9 +135,19 @@ export default function App() {
                   {days.map((d) => (
                     <div
                       key={`d-${m}-${d}`}
-                      className={`day ${d === day - 1 && m === month ? "selected": ""} ${d === currentDay && m === currentMonth ? "today" : ""}`}
-                      // style={getColor()}
-                      onClick={() => {changeDay(d + 1); changeMonth(m)}}
+                      className={`day ${
+                        d + 1 === day && m === month ? "selected" : ""
+                      } ${
+                        d === currentDay && m === currentMonth ? "today" : ""
+                      } ${
+                        getValueAt(d + 1, m, year, "pushups") > 0
+                          ? "filled"
+                          : ""
+                      }`}
+                      onClick={() => {
+                        changeDay(d + 1);
+                        changeMonth(m);
+                      }}
                     ></div>
                   ))}
                 </div>
@@ -127,13 +157,16 @@ export default function App() {
         </div>
 
         <div className="time-select">
-          <span className="day-select-arrow" onClick={() => changeDay(day-1)}>
+          <span className="day-select-arrow" onClick={() => changeDay(day - 1)}>
             &lt;
           </span>
           <h2 className="time-select-title">
             {day === currentDay ? "Today" : `${day}. ${monthNames[month]}`}
           </h2>
-          <span className="time-select-arrow" onClick={() => changeDay(day+1)}>
+          <span
+            className="time-select-arrow"
+            onClick={() => changeDay(day + 1)}
+          >
             &gt;
           </span>
         </div>
