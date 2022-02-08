@@ -13,7 +13,7 @@ export function daysInMonth(month, year) {
 }
 
 export function getDayOfYear(day, month, year) {
-  const date = new Date(year || date.getDayOfYear(), month, day);
+  const date = new Date(year, month, day);
   return Math.floor((date - new Date(year || date.getFullYear(), 0, 0)) / oneDay);
 }
 
